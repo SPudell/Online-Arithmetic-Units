@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7k325tffg900-2" LaunchTime="1502963682">
+  <File Type="VDS-TIMING-PB" Name="dp_oladd_top_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="dp_oladd_top_timing_summary_synth.rpt"/>
+  <File Type="RDS-RDS" Name="dp_oladd_top.vds"/>
+  <File Type="PA-TCL" Name="dp_oladd_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="dp_oladd_top_drc_synth.rpt"/>
+  <File Type="RDS-UTIL" Name="dp_oladd_top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="dp_oladd_top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="dp_oladd_top.dcp"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/functions.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/functions.vhdl"/>
+        <Attr Name="ImportTime" Val="1502896716"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ds_oladd_r2.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/ds_oladd_r2.vhdl"/>
+        <Attr Name="ImportTime" Val="1503061285"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ds_oladd_rg2.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/ds_oladd_rg2.vhdl"/>
+        <Attr Name="ImportTime" Val="1503061277"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/full_adder.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/full_adder.vhdl"/>
+        <Attr Name="ImportTime" Val="1500488757"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/reg.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/reg.vhdl"/>
+        <Attr Name="ImportTime" Val="1502960615"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/reg_bank.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/reg_bank.vhdl"/>
+        <Attr Name="ImportTime" Val="1503576442"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/signed_adder.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/signed_adder.vhdl"/>
+        <Attr Name="ImportTime" Val="1502899863"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/tw_unit.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/tw_unit.vhdl"/>
+        <Attr Name="ImportTime" Val="1502377657"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/dp_oladd_top.vhdl">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/dp_oladd_top.vhdl"/>
+        <Attr Name="ImportTime" Val="1503418428"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/dp_oladd_top_tb.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/dp_oladd_top_tb.vhdl"/>
+        <Attr Name="ImportTime" Val="1503068236"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/signed_adder_tb.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/signed_adder_tb.vhdl"/>
+        <Attr Name="ImportTime" Val="1502900309"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/conv_op.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/conv_op.vhdl"/>
+        <Attr Name="ImportTime" Val="1500492684"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/conv_res.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/conv_res.vhdl"/>
+        <Attr Name="ImportTime" Val="1500492680"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ds_oladd_r2_tb.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/ds_oladd_r2_tb.vhdl"/>
+        <Attr Name="ImportTime" Val="1500395085"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ds_oladd_rg2_tb.vhdl">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../Project_1/Project_1.srcs/sources_1/new/ds_oladd_rg2_tb.vhdl"/>
+        <Attr Name="ImportTime" Val="1502901784"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="dp_oladd_top"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017"/>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>
