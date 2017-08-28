@@ -32,11 +32,23 @@ set rt::rc [catch {
 
     set rt::useElabCache false
     if {$rt::useElabCache == false} {
-      rt::read_vhdl -lib xil_defaultlib /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res.vhdl
+      rt::read_vhdl -lib xil_defaultlib {
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/functions.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/cu.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_r2.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_rg2.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/full_adder.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/reg.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/shift_reg.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/signed_adder.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/tw_unit.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/dp_oladd_top.vhdl
+    }
       rt::filesetChecksum
     }
     rt::set_parameter usePostFindUniquification false
-    set rt::top conv_res
+    set rt::top dp_oladd_top
     set rt::reportTiming false
     rt::set_parameter elaborateOnly true
     rt::set_parameter elaborateRtl true

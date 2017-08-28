@@ -16,9 +16,11 @@ end dp_oladd_top_tb;
 architecture sim of dp_oladd_top_tb is
 	
 	-- component generics
-	constant RAD	: positive := 2;
-	constant A 		: positive := digit_set_bound(RAD);
-	constant N   	: positive := bit_width(A);
+	constant PERIOD : Time := 10 ns;
+	constant RAD	 : positive := 2;
+	constant L		 : positive := 8;
+	constant A 		 : positive := digit_set_bound(RAD);
+	constant N   	 : positive := bit_width(A);
 	
 	-- component ports
 	signal clk, rst 		: std_logic := '1';
@@ -27,6 +29,7 @@ architecture sim of dp_oladd_top_tb is
 	signal rdy_o			: std_logic;
 	signal x_i, y_i 		: std_logic_vector(N-1 downto 0);
 	signal z_o		 		: std_logic_vector(N-1 downto 0);
+	signal q_o 				: std_logic_vector(L*N-1 downto 0);
 	
 	-- control signal
 	signal finished : boolean := false;
@@ -35,20 +38,22 @@ begin
 
 	UUT: entity work.dp_oladd_top
 		generic map (
-			RAD => RAD)
+			RAD => RAD,
+			L 	 => L)
 		port map (
 			clk 	=> clk,
 			rst 	=> rst,
-			vld_i => vld_i,
 			lst_i => lst_i,
+			vld_i => vld_i,
 			lst_o => lst_o,
 			vld_o => vld_o,
 			rdy_o => rdy_o,
 			x_i 	=> x_i,
 			y_i 	=> y_i,
-			z_o 	=> z_o);
+			z_o 	=> z_o,
+			q_o	=> q_o);
 		
-	clk <= not clk after 10 ns when not finished;
+	clk <= not clk after PERIOD / 2 when not finished;
 	
 	stimuli: process
 	begin		
@@ -288,7 +293,7 @@ begin
 		----------------------------------------------------------------------
 		-- x =   0    1    0    0    1    1    0    0 = 76
 		-- y =   0    0    1    1    1    0    1    1 = 59
-		-- -----------------------------------------------
+		-- ------------------------------------------------
 		-- z =   1    0    0    0    1    0  (-1)   1 = 135
 		----------------------------------------------------------------------
 		

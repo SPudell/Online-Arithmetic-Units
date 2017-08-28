@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/conv_res.vhdl"
-vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/functions.vhdl"
-vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/conv_res_tb.vhdl"
-
-# Do not sort compile order
-nosort

@@ -10,14 +10,15 @@ use work.functions.all;
 
 entity dp_oladd_top is
 	generic (
-		RAD	: positive := 4	-- radix-r
+		RAD	: positive := 2;		-- radix-r
+		L 		: positive := 8		-- vector-length -> #digits per operand
 	);
 	port (
 		-- control signals
 		clk 	: in  std_logic;
 		rst 	: in  std_logic;
-		vld_i	: in  std_logic;
 		lst_i	: in  std_logic;
+		vld_i	: in  std_logic;
 		lst_o	: out std_logic;
 		vld_o	: out std_logic;
 		rdy_o	: out std_logic;
@@ -25,7 +26,8 @@ entity dp_oladd_top is
 		--data signals
 		x_i : in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
 		y_i : in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
-		z_o : out std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0)
+		z_o : out std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
+		q_o : out std_logic_vector((L*(bit_width(digit_set_bound(RAD))))-1 downto 0)
 	);
 end dp_oladd_top;
 
@@ -59,9 +61,23 @@ architecture rtl of dp_oladd_top is
 			z_o : out std_logic_vector(N-1 downto 0));
 	end component;
 	
+	component conv_res
+		generic (
+			RAD : positive; 
+			L	 : positive;
+			N	 : positive);
+		port (
+			clk	: in  std_logic;
+			rst	: in  std_logic;
+			vld_i	: in  std_logic;
+			vld_o	: out std_logic;
+			p_i 	: in  std_logic_vector(N-1 downto 0);
+			q_o 	: out std_logic_vector(L*N-1 downto 0));
+	end component;
+	
 	component cu
 		generic(
-			RAD : positive := 2);
+			RAD : positive);
 		port (
 			clk 	: in  std_logic;
 			rst 	: in  std_logic;
@@ -72,21 +88,11 @@ architecture rtl of dp_oladd_top is
 			rdy_o	: out std_logic);
 	end component;
 	
-	signal sig_vld_o : std_logic := '0';
+	signal sig_vld_o  : std_logic := '0';
+	signal sig_vld2_o : std_logic := '0';
+	signal sig_z_o    : std_logic_vector(N-1 downto 0) := (others => '0');
 	
 begin
-
-	ctrl_unit: cu
-		generic map (
-			RAD => RAD)
-		port map (
-			clk 	=> clk,
-			rst 	=> rst,
-			vld_i => vld_i,
-			lst_i => lst_i,
-			lst_o => lst_o,
-			vld_o => sig_vld_o,
-			rdy_o => rdy_o);
 	
 	rad_2: if RAD = 2 generate
 		oladd_r2: ds_oladd_r2
@@ -98,7 +104,7 @@ begin
 				rst => rst,
 				x_i => x_i,
 				y_i => y_i,
-				z_o => z_o);
+				z_o => sig_z_o);
   	end generate rad_2;
 
 	rad_g2: if RAD > 2 generate
@@ -112,10 +118,35 @@ begin
 				rst => rst,
 				x_i => x_i,
 				y_i => y_i,
-				z_o => z_o);
+				z_o => sig_z_o);
   	end generate rad_g2;
   	
+  	ctrl_unit: cu
+		generic map (
+			RAD => RAD)
+		port map (
+			clk 	=> clk,
+			rst 	=> rst,
+			vld_i => vld_i,
+			lst_i => lst_i,
+			lst_o => lst_o,
+			vld_o => sig_vld_o,
+			rdy_o => rdy_o);
   	
-  	vld_o <= sig_vld_o;
+	result_converter: conv_res
+		generic map (
+			RAD => RAD,
+			L	 => L,
+			N	 => N)
+		port map (
+			clk => clk,
+			rst => rst,
+			vld_i => sig_vld_o,
+			vld_o => sig_vld2_o,
+			p_i	=> sig_z_o,
+			q_o => q_o);
+  	
+  	vld_o <= sig_vld2_o;
+  	z_o 	<= sig_z_o;
 	
 end rtl;
