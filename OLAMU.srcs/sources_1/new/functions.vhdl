@@ -3,12 +3,38 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 package functions is
+	function to_dec(rad: positive; l: positive; n: positive; x: std_logic_vector) return integer;
+	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector;
 	function digit_set_bound(arg : positive) return positive;
 	function bit_width(arg : positive) return positive;
 	function log_2_ceil(arg : positive) return positive;
 end package functions;
 
 package body functions is
+	
+	-- calcs the decimal value of a digit-vector with different radix (l -> #digits per vector, n -> #bit per digit)
+	function to_dec(rad: positive; l: positive; n: positive; x: std_logic_vector) return integer is
+		variable res : integer := 0;
+	begin
+		res := to_integer(signed(x((l*n)-1 downto (l*n)-n)));
+				
+		if l > 1 then
+			for i in 1 to l-1 loop
+				res := (res * rad) + to_integer(signed(x(((l-i)*n)-1 downto ((l-i)*n)-n)));
+			end loop;
+		end if;
+		
+		return res;
+	end;
+	
+	-- calcs the binary digit-vector with different radix of a decimal number (l -> #digits per vector, n -> #bit per digit)
+	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector is
+			variable res : std_logic_vector(l*n-1 downto 0) := (others => '0');
+		begin
+			
+			
+			return res;
+		end;
 	
 	-- calcs digit-set boundary for a special radix -> a = (r + 1) / 2
 	function digit_set_bound(arg : positive) return positive is

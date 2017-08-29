@@ -15,19 +15,21 @@ entity dp_oladd_top is
 	);
 	port (
 		-- control signals
-		clk 	: in  std_logic;
-		rst 	: in  std_logic;
-		lst_i	: in  std_logic;
-		vld_i	: in  std_logic;
-		lst_o	: out std_logic;
-		vld_o	: out std_logic;
-		rdy_o	: out std_logic;
+		clk 		: in  std_logic;
+		rst 		: in  std_logic;
+		lst_i		: in  std_logic;
+		vld_i		: in  std_logic;
+		lst_o		: out std_logic;
+		vld_o		: out std_logic;
+		q_vld_o	: out std_logic;
+		rdy_o		: out std_logic;
 		
 		--data signals
-		x_i : in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
-		y_i : in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
-		z_o : out std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
-		q_o : out std_logic_vector((L*(bit_width(digit_set_bound(RAD))))-1 downto 0)
+		x_i 		: in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
+		y_i 		: in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
+		z_o 		: out std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
+		q_o 		: out std_logic_vector((L*(bit_width(digit_set_bound(RAD))))-1 downto 0);
+		q_dec_o 	: out integer
 	);
 end dp_oladd_top;
 
@@ -67,12 +69,13 @@ architecture rtl of dp_oladd_top is
 			L	 : positive;
 			N	 : positive);
 		port (
-			clk	: in  std_logic;
-			rst	: in  std_logic;
-			vld_i	: in  std_logic;
-			vld_o	: out std_logic;
-			p_i 	: in  std_logic_vector(N-1 downto 0);
-			q_o 	: out std_logic_vector(L*N-1 downto 0));
+			clk		: in  std_logic;
+			rst		: in  std_logic;
+			vld_i		: in  std_logic;
+			vld_o		: out std_logic;
+			p_i 		: in  std_logic_vector(N-1 downto 0);
+			q_o 	 	: out std_logic_vector(L*N-1 downto 0);
+			q_dec_o 	: out integer);
 	end component;
 	
 	component cu
@@ -88,9 +91,10 @@ architecture rtl of dp_oladd_top is
 			rdy_o	: out std_logic);
 	end component;
 	
+	signal sig_z_o    : std_logic_vector(N-1 downto 0) := (others => '0');
+	signal sig_q_o    : std_logic_vector(L*N-1 downto 0) := (others => '0');
 	signal sig_vld_o  : std_logic := '0';
 	signal sig_vld2_o : std_logic := '0';
-	signal sig_z_o    : std_logic_vector(N-1 downto 0) := (others => '0');
 	
 begin
 	
@@ -139,14 +143,15 @@ begin
 			L	 => L,
 			N	 => N)
 		port map (
-			clk => clk,
-			rst => rst,
-			vld_i => sig_vld_o,
-			vld_o => sig_vld2_o,
-			p_i	=> sig_z_o,
-			q_o => q_o);
+			clk 		=> clk,
+			rst 		=> rst,
+			vld_i 	=> sig_vld_o,
+			vld_o 	=> q_vld_o,
+			p_i		=> sig_z_o,
+			q_o 		=> q_o,
+			q_dec_o 	=> q_dec_o);
   	
-  	vld_o <= sig_vld2_o;
+  	vld_o <= sig_vld_o;
   	z_o 	<= sig_z_o;
 	
 end rtl;

@@ -30,21 +30,24 @@ architecture rtl of ds_oladd_r2 is
          s   : out std_logic);
    end component;
 
+	signal sig_x  : std_logic_vector(N-1 downto 0) := (others => '0');
+	signal sig_y  : std_logic_vector(N-1 downto 0) := (others => '0');
    signal sig_a2 : std_logic := '0';
    signal sig_b2 : std_logic := '0';
    signal sig_c1 : std_logic := '0';
    signal sig_c2 : std_logic := '0';
    signal sig_s1 : std_logic := '0';
    signal sig_s2 : std_logic := '0';
-   signal sig_z  : std_logic := '0';
+   signal sig_z1 : std_logic := '0';
+   signal sig_z2 : std_logic_vector(N-1 downto 0) := (others => '0');
 
 begin
 
    fa1: full_adder
       port map (
-         a   => x_i(1),
-         b   => not x_i(0),
-         c_i => y_i(1),
+         a   => sig_x(1),
+         b   => not sig_x(0),
+         c_i => sig_y(1),
          c_o => sig_c1,
          s   => sig_s1
    	);
@@ -64,15 +67,30 @@ begin
       	if rst = '1' then
       		sig_a2 <= '0';
       	   sig_b2 <= '0';
-      	   sig_z  <= '0';
-      	   z_o	 <= (others => '0');
+      	   sig_z1 <= '0';
+      	   sig_z2 <= (others => '0');
       	else
 				sig_a2 <= not sig_s1;
-				sig_b2 <= y_i(0);
-				sig_z	 <= sig_s2;
-				z_o	 <= std_logic_vector'(sig_z, not sig_c2);
+				sig_b2 <= sig_y(0);
+				sig_z1 <= sig_s2;
+				sig_z2 <= std_logic_vector'(sig_z1, not sig_c2);
 			end if;
       end if;
    end process;
+   
+	with x_i select
+		sig_x <= "01" when "11",
+   			 	"10" when "01",
+   			 	"00" when others;
+   			 
+	with y_i select
+		sig_y <= "01" when "11",
+   			 	"10" when "01",
+   			 	"00" when others;
+   
+   with sig_z2 select
+		z_o	<= "11" when "01",
+   				"01" when "10",
+					"00" when others;
    
 end rtl;

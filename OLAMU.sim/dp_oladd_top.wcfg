@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="dp_oladd_top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="dp_oladd_top_tb" />
+            <top_module name="functions" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="224000001fs"></ZoomEndTime>
+      <Cursor1Time time="140000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="101"></NameColumnWidth>
+      <ValueColumnWidth column_width="67"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="19" />
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/rdy_o">
+      <obj_property name="ElementShortName">rdy_o</obj_property>
+      <obj_property name="ObjectShortName">rdy_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/lst_i">
+      <obj_property name="ElementShortName">lst_i</obj_property>
+      <obj_property name="ObjectShortName">lst_i</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/vld_i">
+      <obj_property name="ElementShortName">vld_i</obj_property>
+      <obj_property name="ObjectShortName">vld_i</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dp_oladd_top_tb/x_i">
+      <obj_property name="ElementShortName">x_i[1:0]</obj_property>
+      <obj_property name="ObjectShortName">x_i[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dp_oladd_top_tb/y_i">
+      <obj_property name="ElementShortName">y_i[1:0]</obj_property>
+      <obj_property name="ObjectShortName">y_i[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/lst_o">
+      <obj_property name="ElementShortName">lst_o</obj_property>
+      <obj_property name="ObjectShortName">lst_o</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/vld_o">
+      <obj_property name="ElementShortName">vld_o</obj_property>
+      <obj_property name="ObjectShortName">vld_o</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dp_oladd_top_tb/z_o">
+      <obj_property name="ElementShortName">z_o[1:0]</obj_property>
+      <obj_property name="ObjectShortName">z_o[1:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dp_oladd_top_tb/q_vld_o">
+      <obj_property name="ElementShortName">q_vld_o</obj_property>
+      <obj_property name="ObjectShortName">q_vld_o</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dp_oladd_top_tb/q_o">
+      <obj_property name="ElementShortName">q_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">q_o[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/q_dec_o">
+      <obj_property name="ElementShortName">q_dec_o</obj_property>
+      <obj_property name="ObjectShortName">q_dec_o</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/finished">
+      <obj_property name="ElementShortName">finished</obj_property>
+      <obj_property name="ObjectShortName">finished</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/PERIOD">
+      <obj_property name="ElementShortName">PERIOD</obj_property>
+      <obj_property name="ObjectShortName">PERIOD</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/RAD">
+      <obj_property name="ElementShortName">RAD</obj_property>
+      <obj_property name="ObjectShortName">RAD</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/L">
+      <obj_property name="ElementShortName">L</obj_property>
+      <obj_property name="ObjectShortName">L</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/A">
+      <obj_property name="ElementShortName">A</obj_property>
+      <obj_property name="ObjectShortName">A</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/dp_oladd_top_tb/N">
+      <obj_property name="ElementShortName">N</obj_property>
+      <obj_property name="ObjectShortName">N</obj_property>
+   </wvobject>
+</wave_config>

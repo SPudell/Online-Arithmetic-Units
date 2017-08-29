@@ -22,8 +22,9 @@ entity conv_res is
 		vld_o	: out std_logic;
 		
 		-- data signals
-   	p_i 	: in  std_logic_vector(N-1 downto 0);
-   	q_o 	: out std_logic_vector(L*N-1 downto 0)
+   	p_i 		: in  std_logic_vector(N-1 downto 0);
+   	q_o 		: out std_logic_vector(L*N-1 downto 0);
+   	q_dec_o	: out integer
 	);
 end conv_res;
 
@@ -97,9 +98,10 @@ begin
 		end if;
 	end process;
 
-	sft_q  <= '0' when (signed(p_i) < 0) else '1';
-	sft_qm <= '0' when (signed(p_i) > 0) else '1';
+	sft_q   <= '0' when (signed(p_i) < 0) else '1';
+	sft_qm  <= '0' when (signed(p_i) > 0) else '1';
 	
-	q_o <= (15 downto 8 => reg_q(14)) & reg_q(14) & reg_q(12) & reg_q(10) & reg_q(8) & reg_q(6) & reg_q(4) & reg_q(2) & reg_q(0) when RAD = 2 else reg_q;
+	q_o 	  <= reg_q;
+	q_dec_o <= to_dec(RAD, L, N, reg_q);
 	
 end rtl;
