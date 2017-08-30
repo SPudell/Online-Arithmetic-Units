@@ -47,7 +47,7 @@ begin
 	begin
 		if rising_edge(clk) then
 			if rst = '1' then
-				tmp	  := (others => '1')
+				tmp	  := (others => '1');
 				reg_p   <= (others => '0');
 				sig_neg <= '0';
 				sig_vld <= '0';

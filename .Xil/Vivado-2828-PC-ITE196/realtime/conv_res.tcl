@@ -44,11 +44,17 @@ set rt::rc [catch {
       /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/signed_adder.vhdl
       /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/tw_unit.vhdl
       /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/dp_oladd_top.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/dp_oladd_top_tb.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/signed_adder_tb.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_op.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_r2_tb.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_rg2_tb.vhdl
+      /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res_tb.vhdl
     }
       rt::filesetChecksum
     }
     rt::set_parameter usePostFindUniquification false
-    set rt::top dp_oladd_top
+    set rt::top conv_res
     set rt::reportTiming false
     rt::set_parameter elaborateOnly true
     rt::set_parameter elaborateRtl true

@@ -16,7 +16,7 @@ package body functions is
 	function to_dec(rad: positive; l: positive; n: positive; x: std_logic_vector) return integer is
 		variable res : integer := 0;
 	begin
-		res := to_integer(signed(x((l*n)-1 downto (l*n)-n)));
+		res := to_integer(signed(x((l*n)-2 downto (l*n)-n)));
 				
 		if l > 1 then
 			for i in 1 to l-1 loop
@@ -29,11 +29,13 @@ package body functions is
 	
 	-- calcs the binary digit-vector with different radix of a decimal number (l -> #digits per vector, n -> #bit per digit)
 	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector is
-			variable res : std_logic_vector(l*n-1 downto 0) := (others => '0');
+			variable tmp : std_logic_vector(31 downto 0) := (others => '0');
 		begin
+			tmp := std_logic_vector(to_signed(x, tmp'length));
 			
 			
-			return res;
+			
+			return tmp;
 		end;
 	
 	-- calcs digit-set boundary for a special radix -> a = (r + 1) / 2
