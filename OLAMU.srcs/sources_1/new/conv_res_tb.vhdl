@@ -18,7 +18,7 @@ architecture sim of conv_res_tb is
 	-- component generics
 	constant PERIOD : Time := 10 ns;
 	constant RAD 	 : positive := 2;
-	constant L   	 : positive := 3;
+	constant L   	 : positive := 4;
 	constant A 	 	 : positive := digit_set_bound(RAD); 
 	constant N   	 : positive := bit_width(A); 
 	
@@ -76,7 +76,12 @@ begin
 			
 			wait for 1 ns;
 			ref_int := to_dec(RAD, L, N, ref);
-			assert (q_dec_o = ref_int) report integer'image(i) & ".1 number failed. " & integer'image(ref_int) & " expected, but is " & integer'image(q_dec_o) & "." severity error;
+			
+			if ref_int >= -(rad**(L-1)) then
+				assert (q_dec_o = ref_int) report integer'image(i) & ".1 number failed. " & integer'image(ref_int) & " expected, but is " & integer'image(q_dec_o) & "." severity error;
+			else
+				report integer'image(i) & ".3 Overflow: Number " & integer'image(ref_int) & " out of range." severity error;
+			end if;
 			
 			
 			for j in 0 to L-1 loop					-- 0000   0011  1100   1111
@@ -87,7 +92,12 @@ begin
 			
 			wait for 1 ns;
 			ref_int := to_dec(RAD, L, N, ref);
-			assert (q_dec_o = ref_int) report integer'image(i) & ".2 number failed. " & integer'image(ref_int) & " expected, but is " & integer'image(q_dec_o) & "." severity error;
+			
+			if ref_int >= -(rad**(L-1)) then
+				assert (q_dec_o = ref_int) report integer'image(i) & ".2 number failed. " & integer'image(ref_int) & " expected, but is " & integer'image(q_dec_o) & "." severity error;
+			else
+				report integer'image(i) & ".3 Overflow: Number " & integer'image(ref_int) & " out of range." severity error;
+			end if;
 		end loop;
 		
 		vld_i <= '0';

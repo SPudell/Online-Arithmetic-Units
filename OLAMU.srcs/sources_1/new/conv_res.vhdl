@@ -49,6 +49,7 @@ begin
 			else
 				if cnt_r = L-1 then
 					vld_o <= '1';
+					
 				else
 					vld_o <= '0';
 				end if;
