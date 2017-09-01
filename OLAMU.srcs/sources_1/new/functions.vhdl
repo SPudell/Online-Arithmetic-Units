@@ -16,11 +16,11 @@ package body functions is
 	function to_dec(rad: positive; l: positive; n: positive; x: std_logic_vector) return integer is
 		variable res : integer := 0;
 	begin
-		res := to_integer(signed(x((l*n)-2 downto (l*n)-n)));
+		res := to_integer(signed(x((l*n)-1 downto (l*n)-n)));
 				
 		if l > 1 then
 			for i in 1 to l-1 loop
-				res := (res * rad) + to_integer(signed(x(((l-i)*n)-1 downto ((l-i)*n)-n)));
+				res := (res * rad) + to_integer(unsigned(x(((l-i)*n)-1 downto ((l-i)*n)-n)));
 			end loop;
 		end if;
 		

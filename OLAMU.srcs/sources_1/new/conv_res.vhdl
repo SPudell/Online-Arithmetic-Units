@@ -23,15 +23,15 @@ entity conv_res is
 		
 		-- data signals
    	p_i 		: in  std_logic_vector(N-1 downto 0);
-   	q_o 		: out std_logic_vector(L*N-1 downto 0);
+   	q_o 		: out std_logic_vector(L*(N-1)-1 downto 0);
    	q_dec_o	: out integer
 	);
 end conv_res;
 
 architecture rtl of conv_res is
-	
-	signal reg_q  : std_logic_vector(L*N-1 downto 0) := (others => '0');
-	signal reg_qm : std_logic_vector(L*N-1 downto 0) := (others => '0');
+
+	signal reg_q  : std_logic_vector((L*(N-1))-1 downto 0) := (others => '0');
+	signal reg_qm : std_logic_vector((L*(N-1))-1 downto 0) := (others => '0');
 	
 	signal cnt_r  : unsigned(log_2_ceil(L) downto 0) := (others => '0');
 	
@@ -66,6 +66,7 @@ begin
 	end process;
 
 	proc_reg_q: process(clk)
+		variable tmp : std_logic_vector(N-1 downto 0);
 	begin
 		if rising_edge(clk) then
 			if rst = '1' then
@@ -73,9 +74,11 @@ begin
 			else
 				if vld_i = '1' then
 					if sft_q = '1' then
-						reg_q <= reg_q(((L*N-1)-N) downto 0) & p_i;
+						tmp	:= p_i;
+						reg_q <= reg_q((L*N-L-N) downto 0) & tmp(N-2 downto 0);
 					else
-						reg_q <= reg_qm(((L*N-1)-N) downto 0) & std_logic_vector(RAD + signed(p_i));
+						tmp	:= std_logic_vector(RAD + signed(p_i));
+						reg_q <= reg_qm((L*N-L-N) downto 0) & tmp(N-2 downto 0);
 					end if;
 				end if;	
 			end if;
@@ -83,6 +86,7 @@ begin
 	end process;
 	
 	proc_reg_qm: process(clk)
+		variable tmp : std_logic_vector(N-1 downto 0);
 	begin
 		if rising_edge(clk) then
 			if rst = '1' then
@@ -90,9 +94,11 @@ begin
 			else
 				if vld_i = '1' then
 					if sft_qm = '1' then
-						reg_qm <= reg_qm(((L*N-1)-N) downto 0) & std_logic_vector((RAD-1) + signed(p_i));
+						tmp := std_logic_vector((RAD-1) + signed(p_i));
+						reg_qm <= reg_qm((L*N-L-N) downto 0) & tmp(N-2 downto 0);
 					else
-						reg_qm <= reg_q(((L*N-1)-N) downto 0) & std_logic_vector(signed(p_i)-1);
+						tmp := std_logic_vector(signed(p_i)-1);
+						reg_qm <= reg_q((L*N-L-N) downto 0) & tmp(N-2 downto 0);
 					end if;
 				end if;
 			end if;
@@ -103,6 +109,6 @@ begin
 	sft_qm  <= '0' when (signed(p_i) > 0) else '1';
 	
 	q_o 	  <= reg_q;
-	q_dec_o <= to_dec(RAD, L, N, reg_q);
+	q_dec_o <= to_dec(RAD, L, N-1, reg_q);
 	
 end rtl;
