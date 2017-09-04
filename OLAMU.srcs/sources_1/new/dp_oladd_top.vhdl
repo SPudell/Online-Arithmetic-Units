@@ -21,15 +21,19 @@ entity dp_oladd_top is
 		vld_i		: in  std_logic;
 		lst_o		: out std_logic;
 		vld_o		: out std_logic;
-		q_vld_o	: out std_logic;
 		rdy_o		: out std_logic;
 		
+		vld_x_o	: out std_logic;	--\
+		vld_y_o	: out std_logic;	--	> valid signals for q
+		vld_z_o	: out std_logic;	--/
+				
 		--data signals
 		x_i 		: in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
 		y_i 		: in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
 		z_o 		: out std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
-		q_o 		: out std_logic_vector((L*(bit_width(digit_set_bound(RAD))))-1 downto 0);
-		q_dec_o 	: out integer
+		q_x_o		: out std_logic_vector((L*((bit_width(digit_set_bound(RAD)))-1))-1 downto 0);
+		q_y_o		: out std_logic_vector((L*((bit_width(digit_set_bound(RAD)))-1))-1 downto 0);
+		q_z_o		: out std_logic_vector((L*((bit_width(digit_set_bound(RAD)))-1))-1 downto 0)
 	);
 end dp_oladd_top;
 
@@ -74,8 +78,7 @@ architecture rtl of dp_oladd_top is
 			vld_i		: in  std_logic;
 			vld_o		: out std_logic;
 			p_i 		: in  std_logic_vector(N-1 downto 0);
-			q_o 	 	: out std_logic_vector(L*N-1 downto 0);
-			q_dec_o 	: out integer);
+			q_o 	 	: out std_logic_vector((L*(N-1))-1 downto 0));
 	end component;
 	
 	component cu
@@ -92,9 +95,7 @@ architecture rtl of dp_oladd_top is
 	end component;
 	
 	signal sig_z_o    : std_logic_vector(N-1 downto 0) := (others => '0');
-	signal sig_q_o    : std_logic_vector(L*N-1 downto 0) := (others => '0');
 	signal sig_vld_o  : std_logic := '0';
-	signal sig_vld2_o : std_logic := '0';
 	
 begin
 	
@@ -137,19 +138,44 @@ begin
 			vld_o => sig_vld_o,
 			rdy_o => rdy_o);
   	
+  	op_x_converter: conv_res
+		generic map (
+			RAD => RAD,
+			L	 => L,
+			N	 => N)
+		port map (
+			clk 	=> clk,
+			rst 	=> rst,
+			vld_i => vld_i,
+			vld_o => vld_x_o,
+			p_i	=> x_i,
+			q_o 	=> q_x_o);
+
+	op_y_converter: conv_res
+		generic map (
+			RAD => RAD,
+			L	 => L,
+			N	 => N)
+		port map (
+			clk 	=> clk,
+			rst 	=> rst,
+			vld_i => vld_i,
+			vld_o => vld_y_o,
+			p_i	=> y_i,
+			q_o 	=> q_y_o);
+									
 	result_converter: conv_res
 		generic map (
 			RAD => RAD,
 			L	 => L,
 			N	 => N)
 		port map (
-			clk 		=> clk,
-			rst 		=> rst,
-			vld_i 	=> sig_vld_o,
-			vld_o 	=> q_vld_o,
-			p_i		=> sig_z_o,
-			q_o 		=> q_o,
-			q_dec_o 	=> q_dec_o);
+			clk 	=> clk,
+			rst 	=> rst,
+			vld_i	=> sig_vld_o,
+			vld_o => vld_z_o,
+			p_i	=> sig_z_o,
+			q_o 	=> q_z_o);
   	
   	vld_o <= sig_vld_o;
   	z_o 	<= sig_z_o;

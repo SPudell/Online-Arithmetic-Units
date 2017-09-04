@@ -17,10 +17,10 @@ package body functions is
 		variable res : integer := 0;
 	begin
 		res := to_integer(signed(x((l*n)-1 downto (l*n)-n)));
-				
+		
 		if l > 1 then
 			for i in 1 to l-1 loop
-				res := (res * rad) + to_integer(unsigned(x(((l-i)*n)-1 downto ((l-i)*n)-n)));
+				res := (res * rad) + to_integer(signed(x(((l-i)*n)-1 downto ((l-i)*n)-n)));
 			end loop;
 		end if;
 		
@@ -31,9 +31,7 @@ package body functions is
 	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector is
 			variable tmp : std_logic_vector(31 downto 0) := (others => '0');
 		begin
-			tmp := std_logic_vector(to_signed(x, tmp'length));
-			
-			
+			-- not done yet
 			
 			return tmp;
 		end;

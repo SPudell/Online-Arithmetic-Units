@@ -16,7 +16,7 @@ set rt::rc [catch {
     set rt::cmdEcho 0
     rt::set_parameter writeXmsg true
     rt::set_parameter enableParallelHelperSpawn true
-    set ::env(RT_TMP) "./.Xil/Vivado-2828-PC-ITE196/realtime/tmp"
+    set ::env(RT_TMP) "./.Xil/Vivado-21690-PC-ITE196/realtime/tmp"
     if { [ info exists ::env(RT_TMP) ] } {
       file delete -force $::env(RT_TMP)
       file mkdir $::env(RT_TMP)
@@ -54,7 +54,7 @@ set rt::rc [catch {
       rt::filesetChecksum
     }
     rt::set_parameter usePostFindUniquification false
-    set rt::top conv_res
+    set rt::top dp_oladd_top
     set rt::reportTiming false
     rt::set_parameter elaborateOnly true
     rt::set_parameter elaborateRtl true
@@ -65,7 +65,7 @@ set rt::rc [catch {
     rt::set_parameter rstSrlDepthThreshold 4
 # MODE: 
     rt::set_parameter webTalkPath {}
-    rt::set_parameter enableSplitFlowPath "./.Xil/Vivado-2828-PC-ITE196/"
+    rt::set_parameter enableSplitFlowPath "./.Xil/Vivado-21690-PC-ITE196/"
     set ok_to_delete_rt_tmp true 
     if { [rt::get_parameter parallelDebug] } { 
        set ok_to_delete_rt_tmp false 

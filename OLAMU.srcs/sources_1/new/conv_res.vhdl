@@ -11,7 +11,7 @@ use work.functions.all;
 entity conv_res is
 	generic (
 		RAD : positive := 2;		-- radix
-		L	 : positive := 8;		-- vector-length -> #digits
+		L	 : positive := 8;		-- vector-length -> #digits per operand
 		N	 : positive := 2		-- bit-width per digit
 	);
 	port (
@@ -23,8 +23,7 @@ entity conv_res is
 		
 		-- data signals
    	p_i 		: in  std_logic_vector(N-1 downto 0);
-   	q_o 		: out std_logic_vector(L*(N-1)-1 downto 0);
-   	q_dec_o	: out integer
+   	q_o 		: out std_logic_vector((L*(N-1))-1 downto 0)
 	);
 end conv_res;
 
@@ -109,6 +108,5 @@ begin
 	sft_qm  <= '0' when (signed(p_i) > 0) else '1';
 	
 	q_o 	  <= reg_q;
-	q_dec_o <= to_dec(RAD, L, N-1, reg_q);
 	
 end rtl;
