@@ -5,6 +5,7 @@ use ieee.numeric_std.all;
 package functions is
 	function to_dec(rad: positive; l: positive; n: positive; x: std_logic_vector) return integer;
 	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector;
+	function get_online_delay(arg : positive) return positive;
 	function digit_set_bound(arg : positive) return positive;
 	function bit_width(arg : positive) return positive;
 	function log_2_ceil(arg : positive) return positive;
@@ -29,12 +30,25 @@ package body functions is
 	
 	-- calcs the binary digit-vector with different radix of a decimal number (l -> #digits per vector, n -> #bit per digit)
 	function to_bin(rad: positive; l: positive; n: positive; x: integer) return std_logic_vector is
-			variable tmp : std_logic_vector(31 downto 0) := (others => '0');
-		begin
-			-- not done yet
-			
-			return tmp;
-		end;
+		variable tmp : std_logic_vector(31 downto 0) := (others => '0');
+	begin
+		-- not done yet
+		
+		return tmp;
+	end;
+
+	-- provides the online delay depending on the radix
+	function get_online_delay(arg : positive) return positive is
+		variable res : positive;
+	begin
+		if arg = 2 then
+			res := 3;
+		else
+			res := 2;
+		end if;
+				
+		return res;
+	end;
 	
 	-- calcs digit-set boundary for a special radix -> a = (r + 1) / 2
 	function digit_set_bound(arg : positive) return positive is
@@ -77,7 +91,7 @@ package body functions is
 		return res + 1;
 	end;
 	
-	--calcs log2 of a number and rounds the result up to the next integer -> y = ceil(log2(x))
+	-- calcs log2 of a number and rounds the result up to the next integer -> y = ceil(log2(x))
 	function log_2_ceil(arg : positive) return positive is
 		variable tmp : positive;								
 		variable res : natural;
@@ -96,5 +110,5 @@ package body functions is
 				
 		return res;
 	end;
-			
+	
 end functions;

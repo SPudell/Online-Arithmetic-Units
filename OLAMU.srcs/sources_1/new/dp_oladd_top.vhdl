@@ -22,10 +22,9 @@ entity dp_oladd_top is
 		lst_o		: out std_logic;
 		vld_o		: out std_logic;
 		rdy_o		: out std_logic;
-		
-		vld_x_o	: out std_logic;	--\
-		vld_y_o	: out std_logic;	--	> valid signals for q
-		vld_z_o	: out std_logic;	--/
+		vld_x_o	: out std_logic;
+		vld_y_o	: out std_logic;
+		vld_z_o	: out std_logic;
 				
 		--data signals
 		x_i 		: in  std_logic_vector(bit_width(digit_set_bound(RAD))-1 downto 0);
@@ -116,8 +115,8 @@ begin
 		oladd_rg2: ds_oladd_rg2
 			generic map (
 				RAD => RAD,
-				A		=> A,
-				N		=> N)
+				A 	 => A,
+				N	 => N)
 			port map (
 				clk => clk,
 				rst => rst,
@@ -128,7 +127,7 @@ begin
   	
   	ctrl_unit: cu
 		generic map (
-			RAD => RAD)
+			RAD 	=> RAD)
 		port map (
 			clk 	=> clk,
 			rst 	=> rst,
@@ -140,9 +139,9 @@ begin
   	
   	op_x_converter: conv_res
 		generic map (
-			RAD => RAD,
-			L	 => L,
-			N	 => N)
+			RAD 	=> RAD,
+			L	 	=> L,
+			N	 	=> N)
 		port map (
 			clk 	=> clk,
 			rst 	=> rst,
@@ -153,9 +152,9 @@ begin
 
 	op_y_converter: conv_res
 		generic map (
-			RAD => RAD,
-			L	 => L,
-			N	 => N)
+			RAD 	=> RAD,
+			L	 	=> L,
+			N	 	=> N)
 		port map (
 			clk 	=> clk,
 			rst 	=> rst,
@@ -166,9 +165,9 @@ begin
 									
 	result_converter: conv_res
 		generic map (
-			RAD => RAD,
-			L	 => L,
-			N	 => N)
+			RAD 	=> RAD,
+			L	 	=> L,
+			N 		=> N)
 		port map (
 			clk 	=> clk,
 			rst 	=> rst,

@@ -21,66 +21,78 @@ entity cu is
 end cu;
 
 architecture rtl of cu is
-
+	
+	constant W : positive := 1;
+	
 	component shift_reg
 		generic (
-			I 	 	 : positive);
+			I 	 	 : positive;
+			W 	 	 : positive);
 		port (
 			clk 	 : in  std_logic;
 			rst 	 : in  std_logic;
-			data_i : in  std_logic;
-			data_o : out std_logic);
+			data_i : in  std_logic_vector(W-1 downto 0);
+			data_o : out std_logic_vector(W-1 downto 0));
 	end component;
 
+	signal vec_vld_i : std_logic_vector(W-1 downto 0);
+	signal vec_vld_o : std_logic_vector(W-1 downto 0);
+	signal vec_lst_i : std_logic_vector(W-1 downto 0);
+	signal vec_lst_o : std_logic_vector(W-1 downto 0);
+	
 begin
 	
 	rad_2: if RAD = 2 generate
 		shift_reg_lst: shift_reg
 			generic map (
-				I => 3)
+				I => 3,
+				W => W)
 			port map (
 				clk 	 => clk,
 				rst 	 => rst,
-				data_i => lst_i,
-				data_o => lst_o);
+				data_i => vec_lst_i,
+				data_o => vec_lst_o);
 				
 		shift_reg_vld: shift_reg
 			generic map (
-				I => 3)
+				I => 3,
+				W => W)
 			port map (
 				clk 	 => clk,
 				rst 	 => rst,
-				data_i => vld_i,
-				data_o => vld_o);			
+				data_i => vec_vld_i,
+				data_o => vec_vld_o);			
   	end generate rad_2;
 
 	rad_g2: if RAD > 2 generate
 		shift_reg_lst: shift_reg
 			generic map (
-				I => 2)
+				I => 2,
+				W => W)
 			port map (
 				clk 	 => clk,
 				rst 	 => rst,
-				data_i => lst_i,
-				data_o => lst_o);
+				data_i => vec_lst_i,
+				data_o => vec_lst_o);
 				
 		shift_reg_vld: shift_reg
 			generic map (
-				I => 2)
+				I => 2,
+				W => W)
 			port map (
 				clk 	 => clk,
 				rst 	 => rst,
-				data_i => vld_i,
-				data_o => vld_o);				
+				data_i => vec_vld_i,
+				data_o => vec_vld_o);				
   	end generate rad_g2;
   	
-  	process(rst)
-	begin
-		if rst = '1' then
-			rdy_o <= '0';
-		else
-			rdy_o <= '1';
-		end if;
-	end process;
+  	
+  	vec_vld_i(0) <= vld_i;
+  	vec_lst_i(0) <= lst_i;
+ 
+  	vld_o <= vec_vld_o(0);
+  	lst_o <= vec_lst_o(0);
+  	
+  	rdy_o <= '0' when rst = '1' else '1';
 	   
 end rtl;
