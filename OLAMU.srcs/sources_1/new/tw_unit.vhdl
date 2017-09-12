@@ -43,8 +43,8 @@ begin
 		port map (
 			a_i => x_i,
 			b_i => y_i,
-			s_o => tmp_s
-		);
+			s_o => tmp_s);
+		
 		
 	process(tmp_s)
 	begin

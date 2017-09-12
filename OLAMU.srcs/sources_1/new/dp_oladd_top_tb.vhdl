@@ -17,12 +17,12 @@ architecture sim of dp_oladd_top_tb is
 	
 	-- component generics
 	constant PERIOD 	: Time := 10 ns;
-	constant RAD	 	: positive := 2;
-	constant L		 	: positive := 2;
-	constant D		 	: positive := get_online_delay(RAD);
-	constant A 		 	: positive := digit_set_bound(RAD);
-	constant N   	 	: positive := bit_width(A);
-	constant W   	 	: positive := L*(N-1);
+	constant RAD	 	: positive := 8;								-- radix
+	constant L		 	: positive := 2;								-- operand-length -> #digits per operand
+	constant D		 	: positive := get_online_delay(RAD);	-- online-delay
+	constant A 		 	: positive := digit_set_bound(RAD);		-- boundary of the digit-set for specific radix
+	constant N   	 	: positive := bit_width(A);				-- necessary bit-wdith for representation for digits in the set
+	constant W   	 	: positive := L*(N-1);						-- bit-wdith for result-vector in conventional representation  
 		
 	-- component ports
 	signal clk, rst 	: std_logic := '1';
@@ -42,7 +42,8 @@ architecture sim of dp_oladd_top_tb is
 	signal sig_ref_i 	: std_logic_vector(W-1 downto 0) := (others => '0');
 	signal sig_ref_o	: std_logic_vector(W-1 downto 0) := (others => '0');
 	
-	signal success		: std_logic := '0';
+	signal sig_chk_i	: std_logic := '0';
+	signal sig_chk_o	: std_logic := '0';
 	
 	-- control signal
 	signal finished 	: boolean := false;
@@ -80,31 +81,32 @@ begin
 			rst 	 	=> rst,
 			data_i 	=> sig_ref_i,
 			data_o 	=> sig_ref_o);
+			
 		
 	clk <= not clk after PERIOD / 2 when not finished;
 	
 	
 	stimuli: process
-		variable cnt 	: integer := 0;
-		variable cnt_s : integer := 0;
-		variable cnt_f : integer := 0;
-		variable i, j 	: integer range 0 to (2**(L*N+1))-1 := 0;
-		variable i_tmp : unsigned(L*N-1 downto 0) := (others => '0');
-		variable j_tmp : unsigned(L*N-1 downto 0) := (others => '0');
-		variable i_max : unsigned(L*N-1 downto 0) := (others => '1');
-		variable j_max : unsigned(L*N-1 downto 0) := (others => '1');
+		variable cnt_s, cnt_f : integer := 0;
+		variable i, j 			 : integer range 0 to (2**(L*N+1))-1 := 0;
+		variable i_tmp, j_tmp : unsigned(L*N-1 downto 0) := (others => '0');
+		variable i_max, j_max : unsigned(L*N-1 downto 0) := (others => '1');
 	begin
-	
+		------------------------------
+		-- 1. Simu.-Init.
+		------------------------------
 		wait until rising_edge(clk);
 		rst 	<= '0';
 		vld_i <= '0';
 		lst_i <= '0';
-		success <= '0';
 		x_i 	<= (others => '0');
 		y_i 	<= (others => '0');
 		wait until rising_edge(clk);
-		vld_i <= '1';
 		
+		------------------------------
+		-- 2. Simu.-Exec.
+		------------------------------
+		vld_i <= '1';
 		
 		while i <= i_max loop
 			i_tmp := to_unsigned(i, i_tmp'length);
@@ -133,24 +135,21 @@ begin
 					x_i <= std_logic_vector(i_tmp(((L*N)-(k*N)-1) downto ((L*N)-(k*N)-N)));
 					y_i <= std_logic_vector(j_tmp(((L*N)-(k*N)-1) downto ((L*N)-(k*N)-N)));
 					wait until rising_edge(clk);
-					lst_i <= '0';
-					success <= '0';	
+					
+					if vld_z_o = '1' then
+						if q_z_o = sig_ref_o then
+							report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+							cnt_s := cnt_s + 1;
+						else
+							report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+							cnt_f := cnt_f + 1;
+						end if;
+					end if;
 				end loop;
 				
-				vld_i <= '0';
-								
-				cnt := cnt + 1;
-				sig_ref_i <= std_logic_vector(to_unsigned((to_dec(RAD, L, N, std_logic_vector(i_tmp)) + to_dec(RAD, L, N, std_logic_vector(j_tmp))), sig_ref_i'length));
-				--assert (q_z_o = sig_ref_o) report integer'image(cnt-(D-1)) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected." severity error;
-				if q_z_o = sig_ref_o then
-					report integer'image(cnt-(D-1)) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-					cnt_s := cnt_s + 1;
-					success <= '1';
-				else
-					report integer'image(cnt-(D-2)) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-					cnt_f := cnt_f + 1;
-					success <= '0';
-				end if;
+				vld_i 	 <= '0';
+				lst_i 	 <= '0';
+				sig_ref_i <= std_logic_vector(to_signed((to_dec(RAD, L, N, std_logic_vector(i_tmp)) + to_dec(RAD, L, N, std_logic_vector(j_tmp))), sig_ref_i'length));
 				
 				j := j + 1;
 			end loop;
@@ -158,23 +157,33 @@ begin
 			j := 0;
 			i := i + 1;
 		end loop;
-		
-		report "Result: Out of " & integer'image(cnt_s + cnt_f) & " calculations were " & integer'image(cnt_s) & " successful and " &  integer'image(cnt_f) & " failed.";
-				
-		
+						
+		------------------------------
+		-- 3. Simu.-Final.
+		------------------------------
 		vld_i <= '0';
 		lst_i <= '0';
 		x_i 	<= (others => '0');
 		y_i 	<= (others => '0');
 		
+		-- wait for last result digit
 		for m in 0 to D loop
 			wait until rising_edge(clk);
 		end loop;
 		
-		rst 	<= '1';
-		wait until rising_edge(clk);
-		rst 	<= '0';
+		if vld_z_o = '1' then
+			if q_z_o = sig_ref_o then
+				report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+				cnt_s := cnt_s + 1;
+			else
+				report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+				cnt_f := cnt_f + 1;
+			end if;
+		end if;
 		
+		-- final report
+		report "Result: Out of " & integer'image(cnt_s + cnt_f) & " calculations were " & integer'image(cnt_s) & " successful and " &  integer'image(cnt_f) & " failed.";
+				
 		
 		finished <= true;
 		wait;	
