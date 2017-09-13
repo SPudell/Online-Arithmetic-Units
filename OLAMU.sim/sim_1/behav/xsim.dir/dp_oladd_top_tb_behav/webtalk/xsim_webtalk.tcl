@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Tue Sep 12 20:32:18 2017" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Wed Sep 13 12:50:30 2017" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2017.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "1909853" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "LIN64" -context "software_version_and_target_device"
@@ -14,11 +14,11 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "70574d5f-7592-4e34-bf6f-133a689beace" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "56d1816352a04fb88f6314d4e6b9ce98" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "32" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "35" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Ubuntu" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "Ubuntu 16.04.1 LTS" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "Intel(R) Core(TM) i5-4690 CPU @ 3.50GHz" -context "user_environment"
-webtalk_add_data -client project -key cpu_speed -value "3812.128 MHz" -context "user_environment"
+webtalk_add_data -client project -key cpu_speed -value "3786.835 MHz" -context "user_environment"
 webtalk_add_data -client project -key total_processors -value "1" -context "user_environment"
 webtalk_add_data -client project -key system_ram -value "7.000 GB" -context "user_environment"
 webtalk_register_client -client xsim
@@ -36,7 +36,7 @@ webtalk_add_data -client xsim -key Total_Nets -value "0" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Total_Processes -value "52" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Total_Instances -value "24" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Xilinx_HDL_Libraries_Used -value "secureip " -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Time -value "0.35_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Compiler_Memory -value "203056_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 1539640683 -regid "174413354_1777513033_210618170_543" -xml /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Compiler_Time -value "0.32_sec" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Compiler_Memory -value "203028_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 2565143591 -regid "174413354_1777513033_210618170_543" -xml /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/stefan/VivadoProjects/OLAMU/OLAMU.sim/sim_1/behav/xsim.dir/dp_oladd_top_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

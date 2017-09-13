@@ -17,8 +17,8 @@ architecture sim of dp_oladd_top_tb is
 	
 	-- component generics
 	constant PERIOD 	: Time := 10 ns;
-	constant RAD	 	: positive := 8;								-- radix
-	constant L		 	: positive := 2;								-- operand-length -> #digits per operand
+	constant RAD	 	: positive := 16;								-- radix
+	constant L		 	: positive := 3;								-- operand-length -> #digits per operand
 	constant D		 	: positive := get_online_delay(RAD);	-- online-delay
 	constant A 		 	: positive := digit_set_bound(RAD);		-- boundary of the digit-set for specific radix
 	constant N   	 	: positive := bit_width(A);				-- necessary bit-wdith for representation for digits in the set
