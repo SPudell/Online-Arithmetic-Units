@@ -9,23 +9,31 @@ create_project -in_memory -part xc7k325tffg900-2
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir /home/stefan/VivadoProjects/Project_1/Project_1.cache/wt [current_project]
-set_property parent.project_path /home/stefan/VivadoProjects/Project_1/Project_1.xpr [current_project]
+set_property webtalk.parent_dir /home/stefan/VivadoProjects/OLAMU/OLAMU.cache/wt [current_project]
+set_property parent.project_path /home/stefan/VivadoProjects/OLAMU/OLAMU.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:kc705:part0:1.5 [current_project]
-set_property ip_output_repo /home/stefan/VivadoProjects/Project_1/Project_1.cache/ip [current_project]
+set_property ip_output_repo /home/stefan/VivadoProjects/OLAMU/OLAMU.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/functions.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/ds_oladd_r2.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/ds_oladd_rg2.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/full_adder.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/reg.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/reg_bank.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/signed_adder.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/tw_unit.vhdl
-  /home/stefan/VivadoProjects/Project_1/Project_1.srcs/sources_1/new/dp_oladd_top.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/functions.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/cu.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_r2.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_rg2.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/full_adder.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/reg.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/shift_reg.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/signed_adder.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/tw_unit.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/dp_oladd_top.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/dp_oladd_top_tb.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/signed_adder_tb.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_op.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_r2_tb.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_rg2_tb.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res_tb.vhdl
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

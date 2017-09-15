@@ -18,9 +18,7 @@ entity reg is
 end reg;
 
 architecture rtl of reg is
-
 	signal reg_data : std_logic_vector(W-1 downto 0);
-	
 begin
 
    process(clk)

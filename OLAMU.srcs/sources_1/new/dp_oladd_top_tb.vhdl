@@ -17,8 +17,8 @@ architecture sim of dp_oladd_top_tb is
 	
 	-- component generics
 	constant PERIOD 	: Time := 10 ns;
-	constant RAD	 	: positive := 16;								-- radix
-	constant L		 	: positive := 3;								-- operand-length -> #digits per operand
+	constant RAD	 	: positive := 2;								-- radix
+	constant L		 	: positive := 4;								-- operand-length -> #digits per operand
 	constant D		 	: positive := get_online_delay(RAD);	-- online-delay
 	constant A 		 	: positive := digit_set_bound(RAD);		-- boundary of the digit-set for specific radix
 	constant N   	 	: positive := bit_width(A);				-- necessary bit-wdith for representation for digits in the set
@@ -171,6 +171,7 @@ begin
 			wait until rising_edge(clk);
 		end loop;
 		
+		-- last comparison of results
 		if vld_z_o = '1' then
 			if q_z_o = sig_ref_o then
 				report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
@@ -183,7 +184,7 @@ begin
 		
 		-- final report
 		report "Result: Out of " & integer'image(cnt_s + cnt_f) & " calculations were " & integer'image(cnt_s) & " successful and " &  integer'image(cnt_f) & " failed.";
-				
+		
 		
 		finished <= true;
 		wait;	
