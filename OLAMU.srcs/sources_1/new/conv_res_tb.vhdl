@@ -17,8 +17,8 @@ architecture sim of conv_res_tb is
 		
 	-- component generics
 	constant PERIOD : Time := 10 ns;
-	constant RAD 	 : positive := 2;
-	constant L   	 : positive := 12;
+	constant RAD 	 : positive := 4;
+	constant L   	 : positive := 2;
 	constant A 	 	 : positive := digit_set_bound(RAD); 
 	constant N   	 : positive := bit_width(A); 
 	

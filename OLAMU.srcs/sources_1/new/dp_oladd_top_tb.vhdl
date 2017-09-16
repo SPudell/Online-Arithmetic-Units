@@ -42,9 +42,6 @@ architecture sim of dp_oladd_top_tb is
 	signal sig_ref_i 	: std_logic_vector(W-1 downto 0) := (others => '0');
 	signal sig_ref_o	: std_logic_vector(W-1 downto 0) := (others => '0');
 	
-	signal sig_chk_i	: std_logic := '0';
-	signal sig_chk_o	: std_logic := '0';
-	
 	-- control signal
 	signal finished 	: boolean := false;
 	
@@ -137,7 +134,7 @@ begin
 					wait until rising_edge(clk);
 					
 					if vld_z_o = '1' then
-						if q_z_o = sig_ref_o then
+						if (to_integer(signed(q_z_o)) mod RAD) = (to_integer(signed(sig_ref_o)) mod RAD) then
 							report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
 							cnt_s := cnt_s + 1;
 						else
@@ -147,9 +144,13 @@ begin
 					end if;
 				end loop;
 				
+				sig_ref_i <= std_logic_vector(to_unsigned((to_dec(RAD, L, N, std_logic_vector(i_tmp)) + to_dec(RAD, L, N, std_logic_vector(j_tmp))), sig_ref_i'length));
+				
 				vld_i 	 <= '0';
 				lst_i 	 <= '0';
-				sig_ref_i <= std_logic_vector(to_signed((to_dec(RAD, L, N, std_logic_vector(i_tmp)) + to_dec(RAD, L, N, std_logic_vector(j_tmp))), sig_ref_i'length));
+				x_i 	<= (others => '0');
+				y_i 	<= (others => '0');
+				wait until rising_edge(clk);
 				
 				j := j + 1;
 			end loop;
