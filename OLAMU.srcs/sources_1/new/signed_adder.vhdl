@@ -19,7 +19,7 @@ end signed_adder;
 
 architecture rtl of signed_adder is	
 begin
-				  
+
 	s_o <= (a_i(N-1) and b_i(N-1)) & std_logic_vector(signed(a_i) + signed(b_i));
 	
 end rtl;

@@ -13,11 +13,13 @@ entity ds_oladd_rg2 is
 		N		: positive := 3	-- operand bit-width
 	);
    port (
-      clk : in  std_logic;
-      rst : in  std_logic;
-      x_i : in  std_logic_vector(N-1 downto 0);
-      y_i : in  std_logic_vector(N-1 downto 0);
-      z_o : out std_logic_vector(N-1 downto 0)
+      clk 	: in  std_logic;
+      rst 	: in  std_logic;
+      lst_i : in  std_logic;
+      
+      x_i 	: in  std_logic_vector(N-1 downto 0);
+      y_i 	: in  std_logic_vector(N-1 downto 0);
+      z_o 	: out std_logic_vector(N-1 downto 0)
 	);
 end ds_oladd_rg2;
 
@@ -38,18 +40,21 @@ architecture rtl of ds_oladd_rg2 is
    		A		: positive;
    		N 		: positive);
       port (
-         x_i : in  std_logic_vector(N-1 downto 0);
-         y_i : in  std_logic_vector(N-1 downto 0);
-         t_o : out std_logic_vector(N-1 downto 0);
-         w_o : out std_logic_vector(N-1 downto 0));
+      	lst_i : in  std_logic;
+         x_i 	: in  std_logic_vector(N-1 downto 0);
+         y_i 	: in  std_logic_vector(N-1 downto 0);
+         t_o 	: out std_logic_vector(N-1 downto 0);
+         w_o 	: out std_logic_vector(N-1 downto 0));
    end component;
 
-	signal sig_t : std_logic_vector(N-1 downto 0) := (others => '0');
-	signal sig_w : std_logic_vector(N-1	downto 0) := (others => '0');
-	signal sig_z : std_logic_vector(N   downto 0) := (others => '0');
+	signal sig_t 	: std_logic_vector(N-1 downto 0) := (others => '0');
+	signal sig_w 	: std_logic_vector(N-1	downto 0) := (others => '0');
+	signal sig_z 	: std_logic_vector(N   downto 0) := (others => '0');
 	
-	signal reg_w : std_logic_vector(N-1	downto 0) := (others => '0');
-	signal reg_z : std_logic_vector(N-1 downto 0) := (others => '0');
+	signal reg_w 	: std_logic_vector(N-1	downto 0) := (others => '0');
+	signal reg_z   : std_logic_vector(N-1 downto 0) := (others => '0');
+	
+	signal sig_lst : std_logic;
 	
 begin
 
@@ -68,21 +73,24 @@ begin
 			A		=> A,
 			N		=> N)
    	port map (
-   		x_i => x_i,
-   		y_i => y_i,
-   		t_o => sig_t,
-   		w_o => sig_w
+   		lst_i => sig_lst,
+   		x_i 	=> x_i,
+   		y_i 	=> y_i,
+   		t_o 	=> sig_t,
+   		w_o 	=> sig_w
    	);
    
    process(clk)
    begin
    	if rising_edge(clk) then
 			if rst = '1' then
-				reg_w <= (others => '0');
-				reg_z <= (others => '0');
+				reg_w   <= (others => '0');
+				reg_z   <= (others => '0');
+				sig_lst <= '0';
 			else
-				reg_w <= sig_w;
-				reg_z <= sig_z(N-1 downto 0);
+				reg_w   <= sig_w;
+				reg_z   <= sig_z(N-1 downto 0);
+				sig_lst <= lst_i;
 			end if;
 		end if;  	
 	end process;

@@ -11,11 +11,12 @@ entity ds_oladd_r2 is
 		N		: positive := 2	-- operands bit-width
 	);
    port (
-      clk : in  std_logic;
-      rst : in  std_logic;
-		x_i : in  std_logic_vector(N-1 downto 0);
-		y_i : in  std_logic_vector(N-1 downto 0);
-		z_o : out std_logic_vector(N-1 downto 0)
+      clk 	: in  std_logic;
+      rst 	: in  std_logic;
+      lst_i : in  std_logic;
+		x_i 	: in  std_logic_vector(N-1 downto 0);
+		y_i 	: in  std_logic_vector(N-1 downto 0);
+		z_o 	: out std_logic_vector(N-1 downto 0)
 	);
 end ds_oladd_r2;
 
@@ -54,8 +55,8 @@ begin
    
    fa2: full_adder
       port map (
-         a   => not sig_a2,
-         b   => not sig_b2,
+         a   => sig_a2,
+         b   => sig_b2,
          c_i => sig_c1,
          c_o => sig_c2,
          s   => sig_s2
@@ -70,10 +71,17 @@ begin
       	   sig_z1 <= '0';
       	   sig_z2 <= (others => '0');
       	else
-				sig_a2 <= not sig_s1;
-				sig_b2 <= sig_y(0);
+				sig_a2 <= sig_s1;
+				sig_b2 <= not sig_y(0);
 				sig_z1 <= sig_s2;
 				sig_z2 <= std_logic_vector'(sig_z1, not sig_c2);
+				
+				if lst_i = '1' then
+--					sig_a2 <= '1';
+--					sig_b2 <= '0';
+--					sig_z1 <= '1';
+--					sig_z2 <= std_logic_vector'('0', '1');
+				end if;
 			end if;
       end if;
    end process;

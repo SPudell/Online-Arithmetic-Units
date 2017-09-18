@@ -17,8 +17,8 @@ architecture sim of dp_oladd_top_tb is
 	
 	-- component generics
 	constant PERIOD 	: Time := 10 ns;
-	constant RAD	 	: positive := 8;								-- radix
-	constant L		 	: positive := 1;								-- operand-length -> #digits per operand
+	constant RAD	 	: positive := 2;								-- radix
+	constant L		 	: positive := 4;								-- operand-length -> #digits per operand
 	constant D		 	: positive := get_online_delay(RAD);	-- online-delay
 	constant A 		 	: positive := digit_set_bound(RAD);		-- boundary of the digit-set for specific radix
 	constant N   	 	: positive := bit_width(A);				-- necessary bit-wdith for representation for digits in the set
@@ -149,9 +149,13 @@ begin
 				
 				vld_i 	 <= '0';
 				lst_i 	 <= '0';
+				
 				x_i 	<= (others => '0');
 				y_i 	<= (others => '0');
 				wait until rising_edge(clk);
+--				x_i 	<= (others => '0');
+--				y_i 	<= (others => '0');
+--				wait until rising_edge(clk);
 				
 				j := j + 1;
 			end loop;
@@ -169,20 +173,26 @@ begin
 		y_i 	<= (others => '0');
 		
 		-- wait for last result digit
-		for m in 0 to D-1 loop
+		for m in 0 to D loop
 			wait until rising_edge(clk);
-		end loop;
-		
-		-- last comparison of results
-		if vld_z_o = '1' then
-			if q_z_o = sig_ref_o then
-				report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-				cnt_s := cnt_s + 1;
-			else
-				report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-				cnt_f := cnt_f + 1;
+			
+--			if m = D-1 and D = 2 then 
+--				wait until rising_edge(clk);
+--			end if;
+
+			-- forelast and last comparison of result digits
+			if m = 0 or m = D then
+				if vld_z_o = '1' then
+					if q_z_o = sig_ref_o then
+						report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+						cnt_s := cnt_s + 1;
+					else
+						report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
+						cnt_f := cnt_f + 1;
+					end if;
+				end if;
 			end if;
-		end if;
+		end loop;
 		
 		-- final report
 		report "Result: Out of " & integer'image(cnt_s + cnt_f) & " calculations were " & integer'image(cnt_s) & " successful and " &  integer'image(cnt_f) & " failed.";

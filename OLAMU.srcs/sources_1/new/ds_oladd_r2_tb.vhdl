@@ -14,6 +14,7 @@ architecture sim of ds_oladd_r2_tb is
 	
 	-- component ports
 	signal clk, rst : std_logic := '1';
+	signal lst_i 	 : std_logic := '0';
 	signal x_i, y_i : std_logic_vector(1 downto 0);
 	signal z_o		 : std_logic_vector(1 downto 0);
 	
@@ -24,11 +25,12 @@ begin
 
 	UUT: entity work.ds_oladd_r2
 		port map (
-			clk => clk,
-			rst => rst,
-			x_i => x_i,
-			y_i => y_i,
-			z_o => z_o
+			clk 	=> clk,
+			rst 	=> rst,
+			lst_i => lst_i,
+			x_i 	=> x_i,
+			y_i 	=> y_i,
+			z_o 	=> z_o
 		);
 	
 	clk <= not clk after 10 ns when not finished;
