@@ -56,9 +56,9 @@ architecture rtl of dp_oladd_top is
    
 	component ds_oladd_rg2
 		generic (
-			RAD : positive; 
-			A	 : positive;
-			N	 : positive);
+			RAD 	: positive; 
+			A	 	: positive;
+			N	 	: positive);
 		port (
 			clk 	: in  std_logic;
 			rst 	: in  std_logic;
@@ -70,21 +70,21 @@ architecture rtl of dp_oladd_top is
 	
 	component conv_res
 		generic (
-			RAD : positive; 
-			L	 : positive;
-			N	 : positive);
+			RAD 	: positive; 
+			L	 	: positive;
+			N	 	: positive);
 		port (
-			clk		: in  std_logic;
-			rst		: in  std_logic;
-			vld_i		: in  std_logic;
-			vld_o		: out std_logic;
-			p_i 		: in  std_logic_vector(N-1 downto 0);
-			q_o 	 	: out std_logic_vector((L*(N-1))-1 downto 0));
+			clk	: in  std_logic;
+			rst	: in  std_logic;
+			vld_i	: in  std_logic;
+			vld_o	: out std_logic;
+			p_i 	: in  std_logic_vector(N-1 downto 0);
+			q_o 	: out std_logic_vector((L*(N-1))-1 downto 0));
 	end component;
 	
 	component cu
 		generic(
-			RAD : positive);
+			RAD 	: positive);
 		port (
 			clk 	: in  std_logic;
 			rst 	: in  std_logic;
@@ -97,20 +97,8 @@ architecture rtl of dp_oladd_top is
 	
 	signal sig_z_o 	: std_logic_vector(N-1 downto 0) := (others => '0');
 	signal sig_vld_o 	: std_logic := '0';
-	signal sig_lst_i 	: std_logic := '0';
-begin
 	
-	process(clk)
-   begin
-      if rising_edge(clk) then
-      	if rst = '1' then
-   			sig_lst_i <= '0';   		
-      	else
-      		sig_lst_i <= lst_i;
-			end if;
-      end if;
-   end process;
-   
+begin
    
 	rad_2: if RAD = 2 generate
 		oladd_r2: ds_oladd_r2
@@ -120,7 +108,7 @@ begin
 			port map (
 				clk 	=> clk,
 				rst 	=> rst,
-				lst_i => sig_lst_i,
+				lst_i => lst_i,
 				x_i 	=> x_i,
 				y_i 	=> y_i,
 				z_o 	=> sig_z_o);
@@ -129,9 +117,9 @@ begin
 	rad_g2: if RAD > 2 generate
 		oladd_rg2: ds_oladd_rg2
 			generic map (
-				RAD => RAD,
-				A 	 => A,
-				N	 => N)
+				RAD 	=> RAD,
+				A 	 	=> A,
+				N	 	=> N)
 			port map (
 				clk 	=> clk,
 				rst 	=> rst,

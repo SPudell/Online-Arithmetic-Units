@@ -150,9 +150,9 @@ begin
 				vld_i 	 <= '0';
 				lst_i 	 <= '0';
 				
-				x_i 	<= (others => '0');
-				y_i 	<= (others => '0');
-				wait until rising_edge(clk);
+--				x_i 	<= (others => '0');
+--				y_i 	<= (others => '0');
+--				wait until rising_edge(clk);
 --				x_i 	<= (others => '0');
 --				y_i 	<= (others => '0');
 --				wait until rising_edge(clk);

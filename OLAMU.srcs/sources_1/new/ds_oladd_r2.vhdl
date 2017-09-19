@@ -33,6 +33,7 @@ architecture rtl of ds_oladd_r2 is
 
 	signal sig_x  : std_logic_vector(N-1 downto 0) := (others => '0');
 	signal sig_y  : std_logic_vector(N-1 downto 0) := (others => '0');
+   signal sig_z  : std_logic_vector(N-1 downto 0) := (others => '0');
    signal sig_a2 : std_logic := '0';
    signal sig_b2 : std_logic := '0';
    signal sig_c1 : std_logic := '0';
@@ -40,8 +41,10 @@ architecture rtl of ds_oladd_r2 is
    signal sig_s1 : std_logic := '0';
    signal sig_s2 : std_logic := '0';
    signal sig_z1 : std_logic := '0';
-   signal sig_z2 : std_logic_vector(N-1 downto 0) := (others => '0');
-
+   
+	signal sig_lst_i 	: std_logic := '0';
+	signal sig_c2_c 	: std_logic := '0';
+	
 begin
 
    fa1: full_adder
@@ -55,12 +58,14 @@ begin
    
    fa2: full_adder
       port map (
-         a   => sig_a2,
-         b   => sig_b2,
+         a   => not sig_a2,
+         b   => not sig_b2,
          c_i => sig_c1,
          c_o => sig_c2,
          s   => sig_s2
       );
+      
+   sig_c2_c <= '1' when sig_lst_i = '1' else sig_c2;
    
    process(clk)
    begin
@@ -69,23 +74,18 @@ begin
       		sig_a2 <= '0';
       	   sig_b2 <= '0';
       	   sig_z1 <= '0';
-      	   sig_z2 <= (others => '0');
+      	   sig_z  <= (others => '0');
+      	   sig_lst_i <= '0';
       	else
-				sig_a2 <= sig_s1;
-				sig_b2 <= not sig_y(0);
+      		sig_a2 <= not sig_s1;
+      		sig_b2 <= sig_y(0);
 				sig_z1 <= sig_s2;
-				sig_z2 <= std_logic_vector'(sig_z1, not sig_c2);
-				
-				if lst_i = '1' then
---					sig_a2 <= '1';
---					sig_b2 <= '0';
---					sig_z1 <= '1';
---					sig_z2 <= std_logic_vector'('0', '1');
-				end if;
+				sig_z  <= std_logic_vector'(sig_z1, not sig_c2);
+				sig_lst_i <= lst_i;
 			end if;
       end if;
    end process;
-   
+      
 	with x_i select
 		sig_x <= "01" when "11",
    			 	"10" when "01",
@@ -96,7 +96,7 @@ begin
    			 	"10" when "01",
    			 	"00" when others;
    
-   with sig_z2 select
+   with sig_z select
 		z_o	<= "11" when "01",
    				"01" when "10",
 					"00" when others;
