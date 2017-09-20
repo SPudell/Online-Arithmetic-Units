@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7k325tffg900-2" LaunchTime="1505492019">
-  <File Type="ROUTE-ERROR-DCP" Name="dp_oladd_top_routed_error.dcp"/>
-  <File Type="ROUTE-STATUS" Name="dp_oladd_top_route_status.rpt"/>
-  <File Type="ROUTE-DRC-RPX" Name="dp_oladd_top_drc_routed.rpx"/>
-  <File Type="ROUTE-PWR" Name="dp_oladd_top_power_routed.rpt"/>
-  <File Type="ROUTE-PWR-SUM" Name="dp_oladd_top_power_summary_routed.pb"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="dp_oladd_top_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-STATUS-PB" Name="dp_oladd_top_route_status.pb"/>
-  <File Type="PWROPT-DCP" Name="dp_oladd_top_pwropt.dcp"/>
-  <File Type="BITSTR-SYSDEF" Name="dp_oladd_top.sysdef"/>
-  <File Type="BG-BGN" Name="dp_oladd_top.bgn"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="dp_oladd_top_timing_summary_routed.rpt"/>
-  <File Type="BITSTR-BMM" Name="dp_oladd_top_bd.bmm"/>
-  <File Type="OPT-DCP" Name="dp_oladd_top_opt.dcp"/>
-  <File Type="BITSTR-RBT" Name="dp_oladd_top.rbt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="dp_oladd_top_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-DCP" Name="dp_oladd_top_routed.dcp"/>
+  <File Type="BG-BIT" Name="dp_oladd_top.bit"/>
+  <File Type="PHYSOPT-DCP" Name="dp_oladd_top_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="dp_oladd_top_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="dp_oladd_top_timing_summary_postroute_physopted.pb"/>
+  <File Type="RDI-RDI" Name="dp_oladd_top.vdi"/>
+  <File Type="PLACE-TIMING" Name="dp_oladd_top_timing_summary_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="dp_oladd_top_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-CTRL" Name="dp_oladd_top_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="dp_oladd_top_incremental_reuse_placed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="dp_oladd_top_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC" Name="dp_oladd_top_drc_routed.rpt"/>
+  <File Type="PHYSOPT-TIMING" Name="dp_oladd_top_timing_summary_physopted.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="dp_oladd_top_utilization_placed.pb"/>
+  <File Type="ROUTE-DRC-PB" Name="dp_oladd_top_drc_routed.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="dp_oladd_top_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="dp_oladd_top_power_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="dp_oladd_top_timing_summary_postroute_physopted.rpt"/>
+  <File Type="PLACE-UTIL" Name="dp_oladd_top_utilization_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="dp_oladd_top_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="ROUTE-CLK" Name="dp_oladd_top_clock_utilization_routed.rpt"/>
+  <File Type="OPT-TIMING" Name="dp_oladd_top_timing_summary_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="dp_oladd_top.hwdef"/>
   <File Type="ROUTE-SIMILARITY" Name="dp_oladd_top_incremental_reuse_routed.rpt"/>
+  <File Type="BITSTR-RBT" Name="dp_oladd_top.rbt"/>
+  <File Type="OPT-DCP" Name="dp_oladd_top_opt.dcp"/>
+  <File Type="BITSTR-BMM" Name="dp_oladd_top_bd.bmm"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="dp_oladd_top_timing_summary_routed.rpt"/>
+  <File Type="BG-BGN" Name="dp_oladd_top.bgn"/>
+  <File Type="BITSTR-SYSDEF" Name="dp_oladd_top.sysdef"/>
+  <File Type="PWROPT-DCP" Name="dp_oladd_top_pwropt.dcp"/>
+  <File Type="ROUTE-STATUS-PB" Name="dp_oladd_top_route_status.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="dp_oladd_top_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-PWR-SUM" Name="dp_oladd_top_power_summary_routed.pb"/>
+  <File Type="ROUTE-ERROR-DCP" Name="dp_oladd_top_routed_error.dcp"/>
+  <File Type="ROUTE-PWR" Name="dp_oladd_top_power_routed.rpt"/>
+  <File Type="ROUTE-DRC-RPX" Name="dp_oladd_top_drc_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="dp_oladd_top_route_status.rpt"/>
   <File Type="PA-TCL" Name="dp_oladd_top.tcl"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="dp_oladd_top_postplace_pwropt.dcp"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="dp_oladd_top_methodology_drc_opted.rpt"/>
@@ -36,30 +60,6 @@
   <File Type="PWROPT-DRC" Name="dp_oladd_top_drc_pwropted.rpt"/>
   <File Type="OPT-DRC" Name="dp_oladd_top_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="dp_oladd_top_timing_summary_init.rpt"/>
-  <File Type="OPT-HWDEF" Name="dp_oladd_top.hwdef"/>
-  <File Type="OPT-TIMING" Name="dp_oladd_top_timing_summary_opted.rpt"/>
-  <File Type="ROUTE-CLK" Name="dp_oladd_top_clock_utilization_routed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="dp_oladd_top_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PLACE-UTIL" Name="dp_oladd_top_utilization_placed.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="dp_oladd_top_timing_summary_postroute_physopted.rpt"/>
-  <File Type="ROUTE-PWR-RPX" Name="dp_oladd_top_power_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="dp_oladd_top_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-PB" Name="dp_oladd_top_drc_routed.pb"/>
-  <File Type="PLACE-UTIL-PB" Name="dp_oladd_top_utilization_placed.pb"/>
-  <File Type="PHYSOPT-TIMING" Name="dp_oladd_top_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-DRC" Name="dp_oladd_top_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="dp_oladd_top_methodology_drc_routed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="dp_oladd_top_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-CTRL" Name="dp_oladd_top_control_sets_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="dp_oladd_top_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="dp_oladd_top_timing_summary_placed.rpt"/>
-  <File Type="RDI-RDI" Name="dp_oladd_top.vdi"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="dp_oladd_top_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="dp_oladd_top_postroute_physopt.dcp"/>
-  <File Type="PHYSOPT-DCP" Name="dp_oladd_top_physopt.dcp"/>
-  <File Type="BG-BIT" Name="dp_oladd_top.bit"/>
-  <File Type="ROUTE-DCP" Name="dp_oladd_top_routed.dcp"/>
-  <File Type="ROUTE-TIMING-RPX" Name="dp_oladd_top_timing_summary_routed.rpx"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/functions.vhdl">

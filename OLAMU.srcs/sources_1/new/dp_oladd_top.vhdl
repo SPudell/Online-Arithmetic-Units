@@ -10,7 +10,7 @@ use work.functions.all;
 
 entity dp_oladd_top is
 	generic (
-		RAD	: positive := 4;		-- radix-r
+		RAD	: positive := 2;		-- radix-r
 		L 		: positive := 4		-- vector-length -> #digits per operand
 	);
 	port (
