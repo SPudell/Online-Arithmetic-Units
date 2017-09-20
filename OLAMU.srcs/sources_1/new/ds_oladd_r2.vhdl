@@ -43,6 +43,10 @@ architecture rtl of ds_oladd_r2 is
    signal sig_z1 : std_logic := '0';
    
 	signal sig_lst_i 	: std_logic := '0';
+	signal sig_lst_i2	: std_logic := '0';
+	signal sig_lst_i3	: std_logic := '0';
+	
+	signal sig_c1_c 	: std_logic := '0';
 	signal sig_c2_c 	: std_logic := '0';
 	
 begin
@@ -65,7 +69,7 @@ begin
          s   => sig_s2
       );
       
-   sig_c2_c <= '1' when sig_lst_i = '1' else sig_c2;
+   sig_c1_c <= '1' when sig_lst_i3 = '1' else sig_c1;
    
    process(clk)
    begin
@@ -75,13 +79,19 @@ begin
       	   sig_b2 <= '0';
       	   sig_z1 <= '0';
       	   sig_z  <= (others => '0');
+      	   
       	   sig_lst_i <= '0';
+      	   sig_lst_i2 <= '0';
+      	   sig_lst_i3 <= '0';
       	else
       		sig_a2 <= not sig_s1;
       		sig_b2 <= sig_y(0);
 				sig_z1 <= sig_s2;
 				sig_z  <= std_logic_vector'(sig_z1, not sig_c2);
+				
 				sig_lst_i <= lst_i;
+				sig_lst_i2 <= sig_lst_i;
+				sig_lst_i3 <= sig_lst_i2;
 			end if;
       end if;
    end process;

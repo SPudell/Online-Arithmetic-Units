@@ -16,6 +16,8 @@ vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/conv_op.vhdl"
 vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/ds_oladd_r2_tb.vhdl"
 vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/ds_oladd_rg2_tb.vhdl"
 vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/conv_res_tb.vhdl"
+vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/comp_unit.vhdl"
+vhdl xil_defaultlib  "../../../OLAMU.srcs/sources_1/new/comp_unit_tb.vhdl"
 
 # Do not sort compile order
 nosort

@@ -1,5 +1,5 @@
 ------------------------------------------------------------
--- Dynamic-Precision Online-Adder Top-Level (dp_oladd_top)
+-- Composite Algo. Unit (comp_unit)
 ------------------------------------------------------------
 -- Testbench
 ------------------------------------------------------------
@@ -10,15 +10,15 @@ use ieee.numeric_std.all;
 
 use work.functions.all;
 
-entity dp_oladd_top_tb is
-end dp_oladd_top_tb;
+entity comp_unit_tb is
+end comp_unit_tb;
 
-architecture sim of dp_oladd_top_tb is
+architecture sim of comp_unit_tb is
 	
 	-- component generics
 	constant PERIOD 	: Time := 10 ns;
-	constant RAD	 	: positive := 2;								-- radix
-	constant L		 	: positive := 4;								-- operand-length -> #digits per operand
+	constant RAD	 	: positive := 4;								-- radix
+	constant L		 	: positive := 3;								-- operand-length -> #digits per operand
 	constant D		 	: positive := get_online_delay(RAD);	-- online-delay
 	constant A 		 	: positive := digit_set_bound(RAD);		-- boundary of the digit-set for specific radix
 	constant N   	 	: positive := bit_width(A);				-- necessary bit-wdith for representation for digits in the set
@@ -39,15 +39,13 @@ architecture sim of dp_oladd_top_tb is
 	signal q_x_o 		: std_logic_vector(W-1 downto 0) := (others => '0'); 
 	signal q_y_o		: std_logic_vector(W-1 downto 0) := (others => '0');
 	signal q_z_o 		: std_logic_vector(W-1 downto 0) := (others => '0');
-	signal sig_ref_i 	: std_logic_vector(W-1 downto 0) := (others => '0');
-	signal sig_ref_o	: std_logic_vector(W-1 downto 0) := (others => '0');
 	
 	-- control signal
 	signal finished 	: boolean := false;
 	
 begin
 
-	UUT: entity work.dp_oladd_top
+	UUT: entity work.comp_unit
 		generic map (
 			RAD 		=> RAD,
 			L 	 		=> L)
@@ -68,17 +66,6 @@ begin
 			q_x_o		=> q_x_o,
 			q_y_o		=> q_y_o,
 			q_z_o		=> q_z_o
-		);
-	
-	shift_reg_ref: entity work.shift_reg
-		generic map (
-			I 			=> D,
-			W 			=> W)
-		port map (
-			clk 	 	=> clk,
-			rst 	 	=> rst,
-			data_i 	=> sig_ref_i,
-			data_o 	=> sig_ref_o
 		);
 			
 		
@@ -134,20 +121,7 @@ begin
 					x_i <= std_logic_vector(i_tmp(((L*N)-(k*N)-1) downto ((L*N)-(k*N)-N)));
 					y_i <= std_logic_vector(j_tmp(((L*N)-(k*N)-1) downto ((L*N)-(k*N)-N)));
 					wait until rising_edge(clk);
-					
-					--wait for 1ns;
-					if vld_z_o = '1' then
-						if (to_integer(signed(q_z_o)) mod RAD) = (to_integer(signed(sig_ref_o)) mod RAD) then
-							report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-							cnt_s := cnt_s + 1;
-						else
-							report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-							cnt_f := cnt_f + 1;
-						end if;
-					end if;
 				end loop;
-				
-				sig_ref_i <= std_logic_vector(to_unsigned((to_dec(RAD, L, N, std_logic_vector(i_tmp)) + to_dec(RAD, L, N, std_logic_vector(j_tmp))), sig_ref_i'length));
 				
 				vld_i 	 <= '0';
 				lst_i 	 <= '0';
@@ -174,30 +148,9 @@ begin
 		x_i 	<= (others => '0');
 		y_i 	<= (others => '0');
 		
-		-- wait for last result digit
-		for m in 0 to D loop
+		for m in 0 to 2*D loop
 			wait until rising_edge(clk);
-			
---			if m = D-1 and D = 2 then 
---				wait until rising_edge(clk);
---			end if;
-
-			-- forelast and last comparison of result digits
-			if m = 0 or m = D then
-				if vld_z_o = '1' then
-					if q_z_o = sig_ref_o then
-						report integer'image(cnt_s + cnt_f + 1) & ". Computation succeeded. Is " &  integer'image(to_integer(signed(q_z_o))) & ", and " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-						cnt_s := cnt_s + 1;
-					else
-						report integer'image(cnt_s + cnt_f + 1) & ". Computation failed. Is " &  integer'image(to_integer(signed(q_z_o))) & ", but " & integer'image(to_integer(signed(sig_ref_o))) & " expected.";
-						cnt_f := cnt_f + 1;
-					end if;
-				end if;
-			end if;
 		end loop;
-		
-		-- final report
-		report "Result: Out of " & integer'image(cnt_s + cnt_f) & " calculations were " & integer'image(cnt_s) & " successful and " &  integer'image(cnt_f) & " failed.";
 		
 		
 		finished <= true;
