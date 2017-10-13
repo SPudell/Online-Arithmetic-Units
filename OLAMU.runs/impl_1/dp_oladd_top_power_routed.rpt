@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-| Date             : Fri Sep 15 18:14:27 2017
+| Date             : Fri Oct 13 16:19:09 2017
 | Host             : PC-ITE196 running 64-bit Ubuntu 16.04.1 LTS
 | Command          : report_power -file dp_oladd_top_power_routed.rpt -pb dp_oladd_top_power_summary_routed.pb -rpx dp_oladd_top_power_routed.rpx
 | Design           : dp_oladd_top
@@ -29,18 +29,18 @@ Table of Contents
 1. Summary
 ----------
 
-+--------------------------+-----------------------------------+
-| Total On-Chip Power (W)  | 144.921 (Junction temp exceeded!) |
-| Dynamic (W)              | 141.432                           |
-| Device Static (W)        | 3.489                             |
-| Effective TJA (C/W)      | 1.8                               |
-| Max Ambient (C)          | 0.0                               |
-| Junction Temperature (C) | 125.0                             |
-| Confidence Level         | Low                               |
-| Setting File             | ---                               |
-| Simulation Activity File | ---                               |
-| Design Nets Matched      | NA                                |
-+--------------------------+-----------------------------------+
++--------------------------+--------+
+| Total On-Chip Power (W)  | 11.286 |
+| Dynamic (W)              | 11.028 |
+| Device Static (W)        | 0.258  |
+| Effective TJA (C/W)      | 1.8    |
+| Max Ambient (C)          | 65.0   |
+| Junction Temperature (C) | 45.0   |
+| Confidence Level         | Low    |
+| Setting File             | ---    |
+| Simulation Activity File | ---    |
+| Design Nets Matched      | NA     |
++--------------------------+--------+
 
 
 1.1 On-Chip Components
@@ -49,16 +49,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     3.092 |      976 |       --- |             --- |
-|   LUT as Logic |     2.630 |      278 |    203800 |            0.14 |
-|   Register     |     0.431 |      575 |    407600 |            0.14 |
-|   CARRY4       |     0.026 |        6 |     50950 |            0.01 |
+| Slice Logic    |     0.310 |       93 |       --- |             --- |
+|   LUT as Logic |     0.244 |       36 |    203800 |            0.02 |
+|   CARRY4       |     0.039 |       10 |     50950 |            0.02 |
+|   Register     |     0.021 |       26 |    407600 |           <0.01 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   Others       |     0.000 |       10 |       --- |             --- |
-| Signals        |     7.120 |      787 |       --- |             --- |
-| I/O            |   131.219 |      229 |       500 |           45.80 |
-| Static Power   |     3.489 |          |           |                 |
-| Total          |   144.921 |          |           |                 |
+|   Others       |     0.000 |        9 |       --- |             --- |
+| Signals        |     0.434 |       73 |       --- |             --- |
+| I/O            |    10.284 |       40 |       500 |            8.00 |
+| Static Power   |     0.258 |          |           |                 |
+| Total          |    11.286 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -68,16 +68,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |    13.311 |      10.293 |      3.018 |
-| Vccaux    |       1.800 |    10.929 |      10.735 |      0.194 |
+| Vccint    |       1.000 |     1.002 |       0.844 |      0.159 |
+| Vccaux    |       1.800 |     0.866 |       0.834 |      0.033 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |    62.121 |      62.120 |      0.001 |
+| Vcco18    |       1.800 |     4.825 |       4.824 |      0.001 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.084 |       0.000 |      0.084 |
+| Vccbram   |       1.000 |     0.003 |       0.000 |      0.003 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -136,21 +136,18 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| dp_oladd_top             |   141.432 |
-|   ctrl_unit              |     0.019 |
-|     rad_g2.shift_reg_lst |     0.014 |
+| dp_oladd_top             |    11.028 |
+|   ctrl_unit              |     0.016 |
+|     rad_g2.shift_reg_lst |     0.010 |
 |       reg_gen[1].reg_x   |     0.005 |
-|       reg_gen[2].reg_x   |     0.009 |
-|     rad_g2.shift_reg_vld |     0.005 |
-|       reg_gen[1].reg_x   |    <0.001 |
-|       reg_gen[2].reg_x   |     0.005 |
-|   op_x_converter         |     2.046 |
-|   op_y_converter         |     2.031 |
-|   rad_g2.oladd_rg2       |     2.061 |
-|     sa1                  |     0.098 |
-|     tw1                  |     0.215 |
-|       sa1                |     0.215 |
-|   result_converter       |     3.543 |
+|       reg_gen[2].reg_x   |     0.004 |
+|     rad_g2.shift_reg_vld |     0.007 |
+|       reg_gen[1].reg_x   |     0.002 |
+|       reg_gen[2].reg_x   |     0.004 |
+|   rad_g2.oladd_rg2       |     0.614 |
+|     sa1                  |     0.020 |
+|     tw1                  |     0.310 |
+|       sa1                |     0.193 |
 +--------------------------+-----------+
 
 

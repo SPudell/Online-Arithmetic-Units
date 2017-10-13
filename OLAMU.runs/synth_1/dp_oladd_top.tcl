@@ -34,6 +34,8 @@ read_vhdl -library xil_defaultlib {
   /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_r2_tb.vhdl
   /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/ds_oladd_rg2_tb.vhdl
   /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/conv_res_tb.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/comp_unit.vhdl
+  /home/stefan/VivadoProjects/OLAMU/OLAMU.srcs/sources_1/new/comp_unit_tb.vhdl
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

@@ -59,15 +59,15 @@ begin
 			lst_o 	=> lst_o,
 			vld_o 	=> vld_o,
 			rdy_o 	=> rdy_o,
-			vld_x_o 	=> vld_x_o,
-			vld_y_o 	=> vld_y_o,
-			vld_z_o 	=> vld_z_o,
+--			vld_x_o 	=> vld_x_o,
+--			vld_y_o 	=> vld_y_o,
+--			vld_z_o 	=> vld_z_o,
 			x_i 		=> x_i,
 			y_i 		=> y_i,
-			z_o 		=> z_o,
-			q_x_o		=> q_x_o,
-			q_y_o		=> q_y_o,
-			q_z_o		=> q_z_o
+			z_o 		=> z_o
+--			q_x_o		=> q_x_o,
+--			q_y_o		=> q_y_o,
+--			q_z_o		=> q_z_o
 		);
 	
 	shift_reg_ref: entity work.shift_reg

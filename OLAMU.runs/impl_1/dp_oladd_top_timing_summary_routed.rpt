@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-| Date         : Fri Sep 15 18:14:27 2017
+| Date         : Fri Oct 13 16:19:10 2017
 | Host         : PC-ITE196 running 64-bit Ubuntu 16.04.1 LTS
 | Command      : report_timing_summary -warn_on_violation -max_paths 10 -file dp_oladd_top_timing_summary_routed.rpt -rpx dp_oladd_top_timing_summary_routed.rpx
 | Design       : dp_oladd_top
@@ -52,7 +52,7 @@ Table of Contents
 
 1. checking no_clock
 --------------------
- There are 575 register/latch pins with no clock driven by root clock pin: clk (HIGH)
+ There are 26 register/latch pins with no clock driven by root clock pin: clk (HIGH)
 
 
 2. checking constant_clock
@@ -67,21 +67,21 @@ Table of Contents
 
 4. checking unconstrained_internal_endpoints
 --------------------------------------------
- There are 1690 pins that are not constrained for maximum delay. (HIGH)
+ There are 52 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
 
 5. checking no_input_delay
 --------------------------
- There are 21 input ports with no input delay specified. (HIGH)
+ There are 25 input ports with no input delay specified. (HIGH)
 
  There are 0 input ports with no input delay but user has a false path constraint.
 
 
 6. checking no_output_delay
 ---------------------------
- There are 206 ports with no output delay specified. (HIGH)
+ There are 13 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 
